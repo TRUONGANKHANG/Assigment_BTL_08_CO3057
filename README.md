@@ -1,15 +1,16 @@
 # BÀI TẬP LỚN MÔN XỬ LÝ ẢNH SỐ VÀ THỊ GIÁC MÁY TÍNH (CO3057)
- 
+
 ## Lớp: LO1 --- Nhóm BTL_08 --- GVHD: ThS Võ Thanh Hùng
 
 <div align="center">
 
-| STT | MSSV | Họ và tên |
-|:------:|:----------:|:-------------:|
-| 1 | 2213848 | Nguyễn Minh Tú |
-| 2 | 2211476 | Trương An Khang |
-| 3 | 2211873 | Dương Hoàng Long |
-| 4 | 2211756 | Lê Tuấn Kiệt |
+| STT |  MSSV   |    Họ và tên     |
+| :-: | :-----: | :--------------: |
+|  1  | 2213848 |  Nguyễn Minh Tú  |
+|  2  | 2211476 | Trương An Khang  |
+|  3  | 2211873 | Dương Hoàng Long |
+|  4  | 2211756 |   Lê Tuấn Kiệt   |
+
 </div>
 
 ---
@@ -19,7 +20,6 @@
 ![NumPy](https://img.shields.io/badge/Numpy-Numerical-blue)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)
 [![License](https://img.shields.io/badge/License-Academic-green.svg)](LICENSE)
-
 
 ## TỔNG QUAN
 
@@ -40,6 +40,10 @@ Sau khi hoàn thành các bài tập lớn, sinh viên có thể nắm được 
 - Các phương pháp Gradient Domain Editing, đặc biệt là Poisson Image Editing, cho phép ghép ảnh và chỉnh sửa ảnh một cách tự nhiên dựa trên trường gradient.
 
 - Các phép biến đổi hình học trong Computer Vision như translation, rotation, scaling, affine transformation và projective transformation.
+
+- Bài toán ghép ảnh toàn cảnh (image stitching) và quy trình feature-based stitching, bao gồm trích xuất đặc trưng, so khớp và ước lượng homography.
+
+- So sánh và đánh giá các phương pháp trích xuất đặc trưng (SIFT, SURF, ORB) dựa trên chất lượng ghép ảnh.
 
 ---
 
@@ -108,6 +112,60 @@ Thông qua bài tập này, sinh viên hiểu rõ cách biểu diễn ảnh số
    - So sánh với phương pháp ghép ảnh trực tiếp.
    - Đánh giá sự khác nhau giữa **affine transformation** và **projective transformation** thông qua các ví dụ trực quan.
 
+## Assignment 3 - Ghép ảnh toàn cảnh (Image Stitching)
+
+### Các nhiệm vụ cần hoàn thành
+
+1. **Xây dựng pipeline ghép ảnh**
+   - Load một tập gồm 3–4 ảnh chụp cùng một cảnh với các góc nhìn khác nhau.
+   - Thực hiện tiền xử lý ảnh:
+     - Chuyển ảnh sang ảnh xám.
+     - Chuẩn hóa kích thước ảnh (nếu cần).
+   - Trích xuất đặc trưng từ ảnh:
+     - Sử dụng các phương pháp như **SIFT, SURF, ORB**.
+   - Thực hiện so khớp đặc trưng giữa các cặp ảnh.
+   - Ước lượng phép biến đổi hình học:
+     - Tính toán ma trận **Homography**.
+   - Căn chỉnh và ghép ảnh:
+     - Warp ảnh về cùng hệ tọa độ.
+     - Ghép các ảnh để tạo panorama.
+   - Xử lý vùng chồng lấn:
+     - Áp dụng các kỹ thuật blending cơ bản.
+
+2. **So sánh các phương pháp trích xuất đặc trưng**
+   - Áp dụng cùng một pipeline cho ít nhất hai phương pháp khác nhau:
+     - SIFT
+     - SURF
+     - ORB
+   - Đảm bảo điều kiện thực nghiệm giống nhau:
+     - Cùng tập ảnh đầu vào
+     - Cùng tham số matching và RANSAC
+   - So sánh kết quả dựa trên:
+     - Độ chính xác căn chỉnh (alignment)
+     - Tính liên tục của ảnh (seamlessness)
+     - Chất lượng trực quan của panorama
+
+3. **Đánh giá chất lượng ghép ảnh**
+   - So sánh trực quan giữa ảnh panorama và ảnh gốc.
+   - Phân tích các lỗi thường gặp:
+     - Ghosting (nhân đôi chi tiết)
+     - Misalignment (lệch hình)
+     - Distortion (méo hình)
+   - Nhận xét ảnh hưởng của:
+     - Chất lượng feature matching
+     - Phân bố keypoints
+     - Phương pháp blending
+
+4. **Phân tích và nhận xét**
+   - Phân tích vai trò của từng bước trong pipeline ghép ảnh.
+   - So sánh ưu và nhược điểm của các phương pháp:
+     - SIFT (độ chính xác cao)
+     - SURF (cân bằng giữa tốc độ và chất lượng)
+     - ORB (tốc độ nhanh, phù hợp thời gian thực)
+   - Nhận xét các trường hợp:
+     - Ghép ảnh thành công
+     - Ghép ảnh gặp khó khăn (ít texture, thay đổi ánh sáng, góc nhìn lớn)
+
 ---
 
 ## Project Structure
@@ -115,24 +173,27 @@ Thông qua bài tập này, sinh viên hiểu rõ cách biểu diễn ảnh số
 ```
 ASSIGMENT_BTL_08_CO3057
 ├── ASS1/
-│   ├── output/             
-│   ├── sample/            
+│   ├── output/
+│   ├── sample/
 │   ├── High-pass.ipynb
 │   ├── Low-pass.ipynb
 │   └── RGB.ipynb
-├── ASS2/    
-│   ├── input/             
-│   ├── output/            
+├── ASS2/
+│   ├── input/
+│   ├── output/
 │   ├── GradientDomain.ipynb
 │   ├── GraDomainCopy-Paste.ipynb
 │   ├── homography.ipynb
-│   └── tranform.ipynb 
+│   └── tranform.ipynb
 ├── ASS3/
-├── ASS4/             
-└── README.md                
+│   ├── input/
+│   ├── ORB/
+│   ├── SIFT/
+│   └── SUFT/
+├── ASS4/
+└── README.md
 
 ```
-
 
 ## Hướng dẫn chạy
 
