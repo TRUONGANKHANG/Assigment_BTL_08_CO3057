@@ -1,0 +1,20 @@
+{
+  "image": "boat6.jpg",
+  "detections": [
+    {
+      "class": "boat",
+      "confidence": 0.3861529231071472,
+      "x1": 3242,
+      "y1": 630,
+      "x2": 3887,
+      "y2": 1704,
+      "image": "boat6.jpg"
+    }
+  ],
+  "reflection": 0.592415307216709,
+  "reflection_score": 0.592415307216709,
+  "horizon": 1147,
+  "sky_ratio": 0.205103031486562,
+  "water_ratio": 0.13127633538459585,
+  "land_ratio": 0.6636206331288421
+}

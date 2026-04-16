@@ -1,0 +1,10 @@
+{
+  "image": "boat2.jpg",
+  "detections": [],
+  "reflection": 0.6578290847099347,
+  "reflection_score": 0.6578290847099347,
+  "horizon": 1291,
+  "sky_ratio": 0.18975974270309404,
+  "water_ratio": 0.18830107596021947,
+  "land_ratio": 0.6219423566656506
+}
