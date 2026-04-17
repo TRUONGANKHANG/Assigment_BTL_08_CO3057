@@ -45,6 +45,20 @@ Sau khi hoàn thành các bài tập lớn, sinh viên có thể nắm được 
 
 - So sánh và đánh giá các phương pháp trích xuất đặc trưng (SIFT, SURF, ORB) dựa trên chất lượng ghép ảnh.
 
+- Thiết kế và hiện thực một pipeline Computer Vision hoàn chỉnh, kết hợp nhiều mô-đun từ tiền xử lý, phân tích hình học đến phân tích nội dung và trực quan hóa kết quả.
+
+- Áp dụng các kỹ thuật phân tích hình học nâng cao như phát hiện biên (Canny), đường thẳng (Hough Transform), trích xuất đặc trưng (ORB, Harris) và ước lượng phép biến đổi bằng RANSAC.
+
+- Triển khai các phương pháp phân tích nội dung ảnh, bao gồm phát hiện đối tượng bằng mô hình học sâu (YOLOv8) và phân vùng ảnh cơ bản bằng K-Means.
+
+- Gán nhãn ngữ nghĩa cho các vùng trong ảnh (sky, water, land) và phân tích cấu trúc cảnh dựa trên bố cục không gian.
+
+- Ước lượng các đặc trưng quan trọng của cảnh như đường chân trời (horizon detection) và đánh giá mức độ phản chiếu bằng chỉ số SSIM.
+
+- Phát triển kỹ năng trực quan hóa kết quả xử lý ảnh, bao gồm hiển thị bounding boxes, segmentation masks, đường chân trời và tạo ảnh so sánh giữa các bước trong pipeline.
+
+- Rèn luyện khả năng phân tích và đánh giá hệ thống Computer Vision thông qua cả định tính và định lượng, đồng thời nhận diện các hạn chế và đề xuất hướng cải tiến.
+
 ---
 
 ## Assignment 1 - Biểu diễn ảnh màu và lọc tín hiệu
@@ -166,6 +180,67 @@ Thông qua bài tập này, sinh viên hiểu rõ cách biểu diễn ảnh số
      - Ghép ảnh thành công
      - Ghép ảnh gặp khó khăn (ít texture, thay đổi ánh sáng, góc nhìn lớn)
 
+## Assignment 4 - Phân tích và trực quan hóa không gian cảnh
+
+### Các nhiệm vụ cần hoàn thành
+
+1. **Thu thập và tiền xử lý dữ liệu**
+   - Lựa chọn tập dữ liệu gồm các ảnh hoặc video cảnh thực (indoor/outdoor).
+   - Thực hiện các bước tiền xử lý:
+     - Resize và crop ảnh về kích thước chuẩn.
+     - Chuyển đổi không gian màu (BGR → RGB/Gray/HSV).
+     - Giảm nhiễu bằng Gaussian Blur.
+     - Cân bằng ánh sáng bằng CLAHE.
+   - Đảm bảo dữ liệu đầu vào ổn định để phục vụ các bước phân tích tiếp theo.
+
+2. **Phân tích hình học và cấu trúc cảnh**
+   - Áp dụng các kỹ thuật xử lý ảnh để trích xuất đặc trưng hình học:
+     - Phát hiện biên (Canny Edge Detection).
+     - Phát hiện đường thẳng (Hough Transform).
+     - Phát hiện điểm đặc trưng (ORB).
+     - Phát hiện góc (Harris Corner).
+   - Thực hiện so khớp đặc trưng giữa các ảnh.
+   - Ước lượng phép biến đổi hình học (Homography) bằng RANSAC.
+   - (Tuỳ chọn) Thực hiện ghép ảnh panorama từ nhiều ảnh cùng cảnh.
+
+3. **Phân tích nội dung hoặc đối tượng**
+   - Áp dụng ít nhất một kỹ thuật phân tích nội dung:
+     - Phát hiện đối tượng bằng mô hình học sâu (YOLOv8).
+     - Phân vùng ảnh mức cơ bản bằng K-Means.
+   - Gán nhãn ngữ nghĩa cho các vùng chính:
+     - Sky (bầu trời)
+     - Water (mặt nước)
+     - Land (đất liền/công trình)
+   - Ước lượng các đặc trưng của cảnh:
+     - Đường chân trời (Horizon Detection).
+     - Tính toán mức độ phản chiếu (Reflection Score) bằng SSIM.
+     - Tỉ lệ diện tích các vùng ngữ nghĩa.
+
+4. **Trực quan hóa kết quả**
+   - Hiển thị rõ ràng các kết quả xử lý:
+     - Bounding boxes từ object detection.
+     - Mask từ segmentation.
+     - Đường chân trời trên ảnh.
+   - Xây dựng ảnh trực quan hóa tổng hợp:
+     - Overlay các lớp thông tin lên ảnh gốc.
+   - Tạo ảnh so sánh giữa các bước xử lý:
+     - Original
+     - Detection
+     - Segmentation + Horizon
+     - Final Visualization
+
+5. **Thử nghiệm mở rộng (khuyến khích)**
+   - So sánh nhiều phương pháp segmentation khác nhau.
+   - Thử nghiệm với nhiều loại cảnh khác nhau (ánh sáng, thời tiết).
+   - Tối ưu pipeline để tăng tốc độ xử lý.
+   - Áp dụng pipeline cho video thay vì ảnh tĩnh.
+
+6. **Phân tích và đánh giá**
+   - Đánh giá kết quả phát hiện đối tượng (số lượng, độ tin cậy).
+   - Phân tích chất lượng segmentation (nhiễu, sai lệch biên).
+   - Đánh giá độ chính xác của đường chân trời.
+   - So sánh trực quan giữa các bước xử lý.
+   - Phân tích các trường hợp thành công và thất bại của hệ thống.
 ---
 
 ## Project Structure
@@ -191,6 +266,10 @@ ASSIGMENT_BTL_08_CO3057
 │   ├── SIFT/
 │   └── SURF/
 ├── ASS4/
+│   ├── input/
+│   ├── preprocessing
+│   ├── pipeline.ipynb
+│   └── ouput/
 └── README.md
 
 ```
