@@ -189,7 +189,7 @@ ASSIGMENT_BTL_08_CO3057
 │   ├── input/
 │   ├── ORB/
 │   ├── SIFT/
-│   └── SUFT/
+│   └── SURF/
 ├── ASS4/
 └── README.md
 

@@ -11,7 +11,6 @@ from ultralytics import YOLO
 
 # =========================
 # PATH CONFIG
-# Core3.py nằm trong preprocessing/
 # =========================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

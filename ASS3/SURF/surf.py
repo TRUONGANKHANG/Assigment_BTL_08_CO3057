@@ -127,11 +127,11 @@ def save_matches_vis(img1, img2, kp1, kp2, good, path):
     _, mask = cv2.findHomography(src, dst, cv2.RANSAC, 5.0)
     inliers = [m for m, k in zip(good, mask.ravel()) if k]
     vis = cv2.drawMatches(img1, kp1, img2, kp2, inliers[:80], None,
-                          matchColor=(0,180,255), flags=2)
+                            matchColor=(0,180,255), flags=2)
     fig, ax = plt.subplots(figsize=(16, 5))
     ax.imshow(cv2.cvtColor(vis, cv2.COLOR_BGR2RGB))
     ax.set_title(f"SURF Inlier Matches — {len(inliers)} inliers / {len(good)} good matches",
-                 fontsize=13, fontweight="bold")
+                    fontsize=13, fontweight="bold")
     ax.axis("off")
     plt.tight_layout()
     plt.savefig(path, dpi=120, bbox_inches="tight")
@@ -142,7 +142,7 @@ def save_panorama_vis(panorama, path):
     fig, ax = plt.subplots(figsize=(20, 6))
     ax.imshow(cv2.cvtColor(panorama, cv2.COLOR_BGR2RGB))
     ax.set_title(f"Panorama — SURF Center-based  [{panorama.shape[1]}×{panorama.shape[0]}px]",
-                 fontsize=14, fontweight="bold", color="darkred")
+                    fontsize=14, fontweight="bold", color="darkred")
     ax.axis("off")
     plt.tight_layout()
     plt.savefig(path, dpi=120, bbox_inches="tight")

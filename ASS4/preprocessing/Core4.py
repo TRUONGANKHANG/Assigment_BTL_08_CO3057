@@ -209,7 +209,6 @@ summary_rows = []
 for json_path in json_files:
     data = load_json(json_path)
 
-    # JSON đang có dạng boat1.jpg.json -> bỏ .json là ra boat1.jpg
     image_name = os.path.basename(json_path).replace(".json", "")
     image_path = os.path.join(INPUT_DIR, image_name)
 
@@ -237,19 +236,15 @@ for json_path in json_files:
         area = (x2 - x1) * (y2 - y1)
         area_ratio = area / img_area
 
-        # giữ boat thôi
         if det["class"] != "boat":
             continue
 
-        # bỏ confidence thấp
         if conf < 0.45:
             continue
         
-        # bỏ bbox nhỏ
         if area_ratio < 0.01:
             continue
-
-        # bỏ bbox quá lớn
+        
         if area_ratio > 0.35:
             continue
 
